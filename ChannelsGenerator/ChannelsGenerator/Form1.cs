@@ -427,13 +427,15 @@ namespace ChannelsGenerator
                 StreamWriter w = new StreamWriter(filename);
 
                 using (w)
-                {
+                { 
+                    w.WriteLine("#MAMAEXT");
+
                     for (int i = 0; i < verifiedChannels.Count; i++)
                     {
                         writeToLog(verifiedChannels[i].ToString());
 
                         //w.WriteLine(string.Format("{0}\n{1}\n---------------------"), channels[i].ChannelName, channels[i].ChannelURL);
-                        w.WriteLine(verifiedChannels[i].ChannelName + Environment.NewLine + verifiedChannels[i].ChannelURL + Environment.NewLine + "---------------------");
+                        w.WriteLine("ChannelName!"+verifiedChannels[i].ChannelName + Environment.NewLine + "ChannelURL!" +verifiedChannels[i].ChannelURL + Environment.NewLine + "---------------------");
 
                         writeToLog("Written successfully");
                         writeToLog("----------------------------------------------" + Environment.NewLine);
