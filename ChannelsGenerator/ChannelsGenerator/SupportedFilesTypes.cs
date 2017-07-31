@@ -8,7 +8,8 @@ namespace ChannelsGenerator
 {
     public enum SupportedFilesTypes
     {
-        m3u,
-        mama
+        mama,
+        xml,
+        m3u
     }
 }

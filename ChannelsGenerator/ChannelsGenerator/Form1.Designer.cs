@@ -44,12 +44,6 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.settingsGbx = new System.Windows.Forms.GroupBox();
             this.verifyBtn = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.outputMama = new System.Windows.Forms.RadioButton();
-            this.outputM3u = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.inputChan = new System.Windows.Forms.RadioButton();
-            this.inputM3u = new System.Windows.Forms.RadioButton();
             this.generateBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.outputFileName = new System.Windows.Forms.TextBox();
@@ -61,17 +55,21 @@
             this.log = new System.Windows.Forms.RichTextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.previewer = new AxAXVLC.AxVLCPlugin2();
+            this.outputCombo = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.inputCombo = new System.Windows.Forms.ComboBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.player)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.settingsGbx.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewer)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -107,7 +105,7 @@
             this.player.Location = new System.Drawing.Point(309, 229);
             this.player.Name = "player";
             this.player.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("player.OcxState")));
-            this.player.Size = new System.Drawing.Size(18, 18);
+            this.player.Size = new System.Drawing.Size(19, 19);
             this.player.TabIndex = 5;
             this.player.Visible = false;
             // 
@@ -174,12 +172,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.playToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(176, 56);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(106, 28);
             // 
             // playToolStripMenuItem
             // 
             this.playToolStripMenuItem.Name = "playToolStripMenuItem";
-            this.playToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
+            this.playToolStripMenuItem.Size = new System.Drawing.Size(105, 24);
             this.playToolStripMenuItem.Text = "Play";
             this.playToolStripMenuItem.Click += new System.EventHandler(this.playToolStripMenuItem_Click);
             // 
@@ -221,76 +219,6 @@
             this.verifyBtn.Text = "Verify Channels";
             this.verifyBtn.UseVisualStyleBackColor = true;
             this.verifyBtn.Click += new System.EventHandler(this.verifyBtn_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.outputMama);
-            this.groupBox2.Controls.Add(this.outputM3u);
-            this.groupBox2.Location = new System.Drawing.Point(206, 54);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(197, 63);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Output Type";
-            // 
-            // outputMama
-            // 
-            this.outputMama.AutoSize = true;
-            this.outputMama.Checked = true;
-            this.outputMama.Location = new System.Drawing.Point(6, 24);
-            this.outputMama.Name = "outputMama";
-            this.outputMama.Size = new System.Drawing.Size(67, 21);
-            this.outputMama.TabIndex = 7;
-            this.outputMama.TabStop = true;
-            this.outputMama.Text = "mama";
-            this.outputMama.UseVisualStyleBackColor = true;
-            this.outputMama.CheckedChanged += new System.EventHandler(this.outputMama_CheckedChanged);
-            // 
-            // outputM3u
-            // 
-            this.outputM3u.AutoSize = true;
-            this.outputM3u.Location = new System.Drawing.Point(129, 24);
-            this.outputM3u.Name = "outputM3u";
-            this.outputM3u.Size = new System.Drawing.Size(56, 21);
-            this.outputM3u.TabIndex = 8;
-            this.outputM3u.Text = "m3u";
-            this.outputM3u.UseVisualStyleBackColor = true;
-            this.outputM3u.CheckedChanged += new System.EventHandler(this.outputM3u_CheckedChanged);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.inputChan);
-            this.groupBox1.Controls.Add(this.inputM3u);
-            this.groupBox1.Location = new System.Drawing.Point(3, 53);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(197, 63);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Input Type";
-            // 
-            // inputChan
-            // 
-            this.inputChan.AutoSize = true;
-            this.inputChan.Checked = true;
-            this.inputChan.Location = new System.Drawing.Point(6, 24);
-            this.inputChan.Name = "inputChan";
-            this.inputChan.Size = new System.Drawing.Size(67, 21);
-            this.inputChan.TabIndex = 7;
-            this.inputChan.TabStop = true;
-            this.inputChan.Text = "mama";
-            this.inputChan.UseVisualStyleBackColor = true;
-            this.inputChan.CheckedChanged += new System.EventHandler(this.inputMama_CheckedChanged);
-            // 
-            // inputM3u
-            // 
-            this.inputM3u.AutoSize = true;
-            this.inputM3u.Location = new System.Drawing.Point(129, 24);
-            this.inputM3u.Name = "inputM3u";
-            this.inputM3u.Size = new System.Drawing.Size(56, 21);
-            this.inputM3u.TabIndex = 8;
-            this.inputM3u.Text = "m3u";
-            this.inputM3u.UseVisualStyleBackColor = true;
-            this.inputM3u.CheckedChanged += new System.EventHandler(this.inputM3u_CheckedChanged);
             // 
             // generateBtn
             // 
@@ -401,6 +329,46 @@
             this.previewer.Size = new System.Drawing.Size(928, 751);
             this.previewer.TabIndex = 0;
             // 
+            // outputCombo
+            // 
+            this.outputCombo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outputCombo.FormattingEnabled = true;
+            this.outputCombo.Location = new System.Drawing.Point(3, 18);
+            this.outputCombo.Name = "outputCombo";
+            this.outputCombo.Size = new System.Drawing.Size(191, 24);
+            this.outputCombo.TabIndex = 1;
+            this.outputCombo.SelectedIndexChanged += new System.EventHandler(this.outputCombo_SelectedIndexChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.outputCombo);
+            this.groupBox2.Location = new System.Drawing.Point(206, 54);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(197, 63);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Output Type";
+            // 
+            // inputCombo
+            // 
+            this.inputCombo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inputCombo.FormattingEnabled = true;
+            this.inputCombo.Location = new System.Drawing.Point(3, 18);
+            this.inputCombo.Name = "inputCombo";
+            this.inputCombo.Size = new System.Drawing.Size(191, 24);
+            this.inputCombo.TabIndex = 0;
+            this.inputCombo.SelectedIndexChanged += new System.EventHandler(this.inputCombo_SelectedIndexChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.inputCombo);
+            this.groupBox1.Location = new System.Drawing.Point(3, 54);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(197, 63);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Input Type";
+            // 
             // ChannelsGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -422,13 +390,11 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.settingsGbx.ResumeLayout(false);
             this.settingsGbx.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.previewer)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -442,12 +408,6 @@
         private System.Windows.Forms.Button clearLog;
         private System.Windows.Forms.RichTextBox log;
         private System.Windows.Forms.GroupBox settingsGbx;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton outputMama;
-        private System.Windows.Forms.RadioButton outputM3u;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton inputChan;
-        private System.Windows.Forms.RadioButton inputM3u;
         private System.Windows.Forms.Button generateBtn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox outputFileName;
@@ -466,6 +426,10 @@
         private AxAXVLC.AxVLCPlugin2 player;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem playToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox outputCombo;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox inputCombo;
     }
 }
 

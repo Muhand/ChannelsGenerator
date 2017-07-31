@@ -35,18 +35,6 @@ namespace ChannelsGenerator
         {
             InitializeComponent();
 
-            #region FileTypes
-            if (inputChan.Checked == true)
-                inputFileType = SupportedFilesTypes.mama;
-            else
-                inputFileType = SupportedFilesTypes.m3u;
-
-            if (outputMama.Checked == true)
-                outputFileType = SupportedFilesTypes.mama;
-            else
-                outputFileType = SupportedFilesTypes.m3u;
-            #endregion
-
             rawChannels = null;
             loadedChannels = new List<Channel>();
             errorWhileLoadingChannels = 0;
@@ -74,6 +62,19 @@ namespace ChannelsGenerator
             generateBG.RunWorkerCompleted += generateBG_RunWorkerCompleted;
             generateBG.WorkerReportsProgress = true;
             #endregion
+
+            foreach (var item in Enum.GetValues(typeof(SupportedFilesTypes)))
+            {
+                inputCombo.Items.Add(item);
+                outputCombo.Items.Add(item);
+            }
+
+            inputCombo.SelectedIndex = 0;
+            outputCombo.SelectedIndex = 0;
+
+            inputFileType = (SupportedFilesTypes)inputCombo.Items[0];
+            outputFileType = (SupportedFilesTypes)outputCombo.Items[0];
+
         }
 
         #region Load
@@ -201,11 +202,34 @@ namespace ChannelsGenerator
         {
             writeToLog("Channels generator began..." + Environment.NewLine);
 
-            var t = new Thread(generate);
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start();
+            ThreadStart par = null;
+            bool outputError = false;
 
-            t.Join();
+            switch (outputFileType)
+            {
+                case SupportedFilesTypes.m3u:
+                    par = new ThreadStart(generateM3u);
+                    break;
+                case SupportedFilesTypes.xml:
+                    par = new ThreadStart(generateXml);
+                    break;
+                case SupportedFilesTypes.mama:
+                    par = new ThreadStart(generateMama);
+                    break;
+                default:
+                    writeToLog("Incorrect file extension was chosen");
+                    outputError = true;
+                    break;
+            }
+
+            if (!outputError)
+            {
+                var t = new Thread(par);
+                t.SetApartmentState(ApartmentState.STA);
+                t.Start();
+
+                t.Join();
+            }
         }
         #endregion
 
@@ -227,28 +251,6 @@ namespace ChannelsGenerator
         private void generateBtn_Click(object sender, EventArgs e)
         {
             generateBG.RunWorkerAsync();
-        }
-        #endregion
-
-        #region Checkbox
-        private void inputMama_CheckedChanged(object sender, EventArgs e)
-        {
-            inputFileType = SupportedFilesTypes.mama;
-        }
-
-        private void outputMama_CheckedChanged(object sender, EventArgs e)
-        {
-            outputFileType = SupportedFilesTypes.mama;
-        }
-
-        private void inputM3u_CheckedChanged(object sender, EventArgs e)
-        {
-            inputFileType = SupportedFilesTypes.m3u;
-        }
-
-        private void outputM3u_CheckedChanged(object sender, EventArgs e)
-        {
-            outputFileType = SupportedFilesTypes.m3u;
         }
         #endregion
 
@@ -416,7 +418,7 @@ namespace ChannelsGenerator
             errorPlaying = true;
         }
 
-        private void generate()
+        private void generateMama()
         {
             string filename = outputFileName.Text + "." + outputFileType;
             writeToLog("Now writing to "+filename + Environment.NewLine);
@@ -451,6 +453,54 @@ namespace ChannelsGenerator
             }
         }
 
+        private void generateXml()
+        {
+            string filename = outputFileName.Text + "." + outputFileType;
+            writeToLog("Now writing to " + filename + Environment.NewLine);
+
+            try
+            {
+                //StreamWriter w = new StreamWriter("channels_" + DateTime.Now.ToString("dd-MM-yyyy") + ".conf");
+                StreamWriter w = new StreamWriter(filename);
+
+                using (w)
+                {
+                    //w.WriteLine("#MAMAXMLEXT");
+                    w.WriteLine("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
+                    w.WriteLine("<Channels>");
+                    for (int i = 0; i < verifiedChannels.Count; i++)
+                    {
+                        writeToLog(verifiedChannels[i].ToString());
+
+                        w.WriteLine("<Channel>");
+                        //w.WriteLine(string.Format("{0}\n{1}\n---------------------"), channels[i].ChannelName, channels[i].ChannelURL);
+                        //w.WriteLine("ChannelName!" + verifiedChannels[i].ChannelName + Environment.NewLine + "ChannelURL!" + verifiedChannels[i].ChannelURL + Environment.NewLine + "---------------------");
+                        w.WriteLine("<ChannelName>"+verifiedChannels[i].ChannelName+"</ChannelName>");
+                        w.WriteLine("<ChannelURL>" + verifiedChannels[i].ChannelURL + "</ChannelURL>");
+                        
+                        w.WriteLine("</Channel>");
+
+                        writeToLog("Written successfully");
+                        writeToLog("----------------------------------------------" + Environment.NewLine);
+                        generateBG.ReportProgress(i + 1);
+                    }
+                    w.WriteLine("</Channels>");
+                }
+                w.Close();
+                writeToLog(verifiedChannels.Count + " channels were written to " + filename + " successfully");
+            }
+            catch (Exception ex)
+            {
+                writeToLog(String.Format("There was an error writing to " + filename + ", original error is: {0}", ex.Message));
+            }
+        }
+        private void generateM3u()
+        {
+
+        }
+
+
+
         private void writeToLog(string message)
         {
             Action action = () => log.AppendText(message + Environment.NewLine);
@@ -480,6 +530,19 @@ namespace ChannelsGenerator
                 previewer.playlist.playItem(0);
                 tabControl1.SelectTab(2);
             }
+        }
+        #endregion
+
+        #region FileTypes
+
+        private void inputCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            inputFileType = (SupportedFilesTypes)inputCombo.SelectedItem;
+        }
+
+        private void outputCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            outputFileType = (SupportedFilesTypes)outputCombo.SelectedItem;
         }
         #endregion
     }
